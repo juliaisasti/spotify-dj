@@ -1,33 +1,31 @@
-// const spotifyService = require('../services/spotifyServices');
 const axios = require('axios');
 const qs = require('qs');
+const spotifyService = require('../services/spotifyServices');
 
 const handleCallback = async (req, res) => {
-  const code = req.query.code;
+  const { code } = req.query;
 
   try {
-    // Serializa los datos en formato application/x-www-form-urlencoded
-    const data = qs.stringify({
+    const data = {
       grant_type: 'authorization_code',
       code,
       redirect_uri: process.env.REDIRECT_URI,
       client_id: process.env.SPOTIFY_CLIENT_ID,
       client_secret: process.env.SPOTIFY_CLIENT_SECRET,
-    });
+    };
 
-    // Realiza la solicitud POST a Spotify para obtener tokens de acceso
-    const response = await axios.post('https://accounts.spotify.com/api/token', data, {
+    const response = await axios.post('https://accounts.spotify.com/api/token', qs.stringify(data), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
 
-    // Maneja la respuesta de Spotify y almacena los tokens de acceso y actualización según sea necesario
     const { access_token, refresh_token } = response.data;
 
-    // Puedes almacenar los tokens en la sesión del usuario, base de datos, etc.
+    // Guarda los tokens en la sesión
+    req.session.access_token = access_token;
+    req.session.refresh_token = refresh_token;
 
-    // Redirige o responde al cliente según sea necesario
     res.send('Autorización exitosa! Tokens obtenidos.');
   } catch (error) {
     console.error('Error al intercambiar el código de autorización por tokens:', error);
@@ -35,16 +33,15 @@ const handleCallback = async (req, res) => {
   }
 };
 
-async function handleTokenRefresh(req, res) {
-  const refreshToken = req.body.refreshToken;
-
+const handleTokenRefresh = async (refreshToken) => {
   try {
     const newAccessToken = await spotifyService.refreshAccessToken(refreshToken);
-    res.json({ accessToken: newAccessToken });
+    return newAccessToken; // Devuelve el nuevo access token
   } catch (error) {
-    res.status(500).json({ error: 'Failed to refresh access token' });
+    console.error('Error al refrescar el token de acceso:', error);
+    throw error;
   }
-}
+};
 
 module.exports = {
   handleCallback,
