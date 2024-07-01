@@ -1,5 +1,6 @@
 const axios = require('axios');
 const authController = require('../controllers/authControllers');
+require('dotenv').config()
 
 const searchSongs = async (req, res) => {
   const { query } = req.query;
@@ -24,8 +25,7 @@ const searchSongs = async (req, res) => {
     const response = await axios.get('https://api.spotify.com/v1/search', {
       params: {
         q: query,
-        type: 'track',
-        market: 'US'
+        type: 'track'
       },
       headers: {
         'Authorization': 'Bearer ' + accessToken

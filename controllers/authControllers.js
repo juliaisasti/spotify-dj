@@ -4,7 +4,7 @@ const spotifyService = require('../services/spotifyServices');
 
 const handleCallback = async (req, res) => {
   const { code } = req.query;
-  console.log(code);
+  console.log('Authorization Code:', code);
 
   try {
     const data = {
@@ -21,15 +21,21 @@ const handleCallback = async (req, res) => {
       }
     });
 
-    const { access_token, refresh_token } = response.data;
+    // Verifica la estructura de la respuesta
+    console.log('Response Data:', response.data);
 
-    // Guarda los tokens en la sesión
-    req.session.access_token = access_token;
-    req.session.refresh_token = refresh_token;
+    const { access_token, refresh_token } = response.data; // Accede a los tokens en la propiedad data
 
-    res.send('Autorización exitosa! Tokens obtenidos.');
+    if (access_token && refresh_token) {
+      req.session.access_token = access_token;
+      req.session.refresh_token = refresh_token;
+      res.send('Autorización exitosa! Tokens obtenidos.');
+    } else {
+      console.error('Tokens no encontrados en la respuesta:', response.data);
+      res.status(500).send('Error al autorizar la aplicación. Tokens no encontrados.');
+    }
   } catch (error) {
-    console.error('Error al intercambiar el código de autorización por tokens:', error);
+    console.error('Error al intercambiar el código de autorización por tokens:', error.response ? error.response.data : error.message);
     res.status(500).send('Error al autorizar la aplicación.');
   }
 };
