@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authControllers');
+const querystring = require('querystring');
+require('dotenv').config();
 
-const clientId = process.env.SPOTIFY_CLIENT_ID;
-const redirectUri = process.env.REDIRECT_URI;
-const scopes = 'user-read-private user-read-email';
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const redirect_uri = process.env.REDIRECT_URI;
 
 router.get('/login', (req, res) => {
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}`;
-  res.redirect(authUrl);
+  var scope = 'user-read-private user-read-email';
+
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri
+    }));
 });
 
 router.get('/callback', authController.handleCallback);

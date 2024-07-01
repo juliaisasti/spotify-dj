@@ -4,6 +4,7 @@ const spotifyService = require('../services/spotifyServices');
 
 const handleCallback = async (req, res) => {
   const { code } = req.query;
+  console.log(code);
 
   try {
     const data = {
@@ -36,7 +37,7 @@ const handleCallback = async (req, res) => {
 const handleTokenRefresh = async (refreshToken) => {
   try {
     const newAccessToken = await spotifyService.refreshAccessToken(refreshToken);
-    return newAccessToken; // Devuelve el nuevo access token
+    return newAccessToken;
   } catch (error) {
     console.error('Error al refrescar el token de acceso:', error);
     throw error;

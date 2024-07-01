@@ -18,7 +18,7 @@ async function refreshAccessToken(refreshToken) {
 
   try {
     const response = await axios.post(tokenUrl, data, { headers: headers });
-    return response.data.access_token; // Asegúrate de que se devuelva correctamente access_token
+    return response.data.access_token;
   } catch (error) {
     console.error('Error refreshing access token:', error);
     throw error;
