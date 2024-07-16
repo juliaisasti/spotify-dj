@@ -8,12 +8,6 @@ require('dotenv').config()
 
 const app = express();
 const port = process.env.PORT || 3000;
-const http = require('http')
-const server = http.createServer((req, res) => {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'text/plain')
-  res.end(`Hello ${process.env.HELLO}`)
-})
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -26,6 +20,15 @@ app.use(
     cookie: { secure: false }
   })
 );
+
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 app.use('/auth', authRoutes); 
 app.use('/search', searchRoutes); 
