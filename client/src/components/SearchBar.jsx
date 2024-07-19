@@ -14,16 +14,16 @@ const SearchBar = () => {
       });
       setResults(response.data);
       console.log(results.track.name);
-      setError(null);
+      // setError(null);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setError("Error fetching data. Please try again.");
-      setResults(null);
+      // setError("Error fetching data. Please try again.");
+      // setResults(null);
     }
   };
 
   return (
-    <div>
+    <>
       <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
         <label
           htmlFor="default-search"
@@ -70,57 +70,75 @@ const SearchBar = () => {
       {error && <p className="text-red-500 mt-4">{error}</p>}
 
       {results && (
-        <div className="mt-8">
-          <h2 className="text-red-500 text-lg font-bold mb-4">Track Details</h2>
-          <div className="mb-4 text-red-500">
-            <p>
-              <strong>Name:</strong> {results.track.name}
-            </p>
-            <p>
-              <strong>Artist:</strong> {results.track.artist}
-            </p>
-            <p>
-              <strong>Album:</strong> {results.track.album}
-            </p>
-            {results.track.albumImageUrl && (
-              <img src={results.track.albumImageUrl} alt={results.track.name} />
-            )}
+        <div>
+          <div className="mt-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+              {results.track.albumImageUrl && (
+                <img
+                  className="rounded-t-lg"
+                  src={results.track.albumImageUrl}
+                  alt={results.track.name}
+                />
+              )}
+            </a>
+            <div className="p-5">
+              <a href="#">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {results.track.name}
+                </h5>
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {results.track.artist}
+                </h5>
+              </a>
+              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                from the album "{results.track.album}"
+              </p>
+              <h5 className="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Audio Features
+              </h5>
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {results.audioFeatures.tempo} BPMs
+              </h5>
+            </div>
           </div>
 
-          <h2 className="text-red-500 text-lg font-bold mb-4">
-            Audio Features
-          </h2>
-          <p className="text-red-500">
-            <strong>Tempo:</strong> {results.audioFeatures.tempo}
-          </p>
-
-          <h2 className="text-red-500 text-lg font-bold mb-4">
-            Recommendations
-          </h2>
-          <ul>
+          <h4>Recommendations</h4>
+          <ul className="grid grid-cols-3 gap-4">
             {results.recommendations.map((rec, index) => (
-              <li key={index} className="text-red-500 mb-2">
-                <p>
-                  <strong>Name:</strong> {rec.name}
-                </p>
-                <p>
-                  <strong>Artist:</strong> {rec.artist}
-                </p>
-                <p>
-                  <strong>Album:</strong> {rec.album}
-                </p>
+              <div
+                div
+                className="mt-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              >
                 {rec.albumImageUrl && (
-                  <img src={rec.albumImageUrl} alt={rec.name} />
+                  <img
+                    className="rounded-t-lg"
+                    src={rec.albumImageUrl}
+                    alt={rec.name}
+                  />
                 )}
-                <p>
-                  <strong>Tempo:</strong> {rec.tempo}
-                </p>
-              </li>
+                <li key={index} className="p-5">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {rec.name}
+                  </h5>
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {rec.artist}
+                  </h5>
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    from the album "{rec.album}"
+                  </p>
+                  <h5 className="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Audio Features
+                  </h5>
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {rec.tempo} BPMs
+                  </h5>
+                </li>
+              </div>
             ))}
           </ul>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -15,10 +15,10 @@ const Footer = () => {
                     <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul className="text-gray-600 dark:text-gray-400">
                         <li className="mb-4">
-                            <a href="https://juliaisasti.netlify.com" className="hover:underline">Personal Portfolio</a>
+                            <a href="https://juliaisasti.netlify.app" className="hover:underline"  target="_blank">Personal Portfolio</a>
                         </li>
                         <li>
-                            <a href="https://github.com/juliaisasti/spotify-dj" className="hover:underline">Project's repository</a>
+                            <a href="https://github.com/juliaisasti/spotify-dj" className="hover:underline"  target="_blank">Project's repository</a>
                         </li>
                     </ul>
                 </div>
@@ -26,10 +26,10 @@ const Footer = () => {
                     <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow me</h2>
                     <ul className="text-gray-600 dark:text-gray-400">
                         <li className="mb-4">
-                            <a href="https://github.com/juliaisasti" className="hover:underline ">Github Profile</a>
+                            <a href="https://github.com/juliaisasti" className="hover:underline" target="_blank">Github Profile</a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/juliaisasti/" className="hover:underline">LinkedIn</a>
+                            <a href="https://www.linkedin.com/in/juliaisasti/" className="hover:underline" target="_blank">LinkedIn</a>
                         </li>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@ const Footer = () => {
                     <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Other links</h2>
                     <ul className="text-gray-600 dark:text-gray-400">
                         <li className="mb-4">
-                            <a href="https://developer.spotify.com/documentation/web-api" className="hover:underline">Spotify's Web API</a>
+                            <a href="https://developer.spotify.com/documentation/web-api" className="hover:underline" target="_blank">Spotify's Web API</a>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://juliaisasti.netlify.com" className="hover:underline">Julia Isasti</a>. All Rights Reserved.
+            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://juliaisasti.netlify.app" className="hover:underline"  target="_blank">Julia Isasti</a>. All Rights Reserved.
             </span>
             <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                 <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
