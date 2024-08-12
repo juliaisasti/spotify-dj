@@ -29,7 +29,7 @@ const handleCallback = async (req, res) => {
     if (access_token && refresh_token) {
       req.session.access_token = access_token;
       req.session.refresh_token = refresh_token;
-      res.redirect(`http://localhost:5173/?access_token=${access_token}&refresh_token=${refresh_token}`);
+      res.redirect(`https://spotifybpm-beta.vercel.app/?access_token=${access_token}&refresh_token=${refresh_token}`);
     } else {
       console.error('Tokens no encontrados en la respuesta:', response.data);
       res.status(500).send('Error al autorizar la aplicación. Tokens no encontrados.');
