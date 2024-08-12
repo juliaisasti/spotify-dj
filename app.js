@@ -34,7 +34,7 @@ app.use('/auth', authRoutes);
 app.use('/search', searchRoutes); 
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Spotify Auth App');
+  res.send('Welcome to Spotify Auth App!');
 });
 
 app.listen(port, () => {
