@@ -11,7 +11,7 @@ const Hero = () => {
               Search a song, get its BPMs and recommendations.
             </h1>
             <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-              Get the track's info and tempo while browsing new songs with the same BPMs. 
+              Login first, then get the track's info and tempo while browsing new songs with the same BPMs. 
             </p>
             <SearchBar />
           </div>
